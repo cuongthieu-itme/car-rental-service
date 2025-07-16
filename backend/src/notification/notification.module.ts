@@ -11,6 +11,9 @@ import { NotificationsController } from './notification.controller';
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (config: ConfigService) => ({
+        logger: false,
+        debug: false,
+        verify: false,
         transport: {
           host: config.get<string>('EMAIL_HOST'),
           port: Number(config.get<string>('EMAIL_PORT')) || 587,
@@ -26,7 +29,9 @@ import { NotificationsController } from './notification.controller';
           },
         },
         defaults: {
-          from: config.get<string>('EMAIL_FROM') || `"CarRental" <noreply@carrentalapp.com>`,
+          from:
+            config.get<string>('EMAIL_FROM') ||
+            `"CarRental" <noreply@carrentalapp.com>`,
         },
       }),
       inject: [ConfigService],

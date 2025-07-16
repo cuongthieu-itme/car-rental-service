@@ -103,6 +103,8 @@ model SupportTicket {
   resolvedAt DateTime?
 
   user User @relation(fields: [userId], references: [id])
+
+  @@map("support_tickets")
 }
 
 model Vehicle {
@@ -146,6 +148,8 @@ model Booking {
 
   payment      Payment?
   VehicleIssue VehicleIssue[]
+
+  @@map("bookings")
 }
 
 model Payment {
@@ -160,6 +164,8 @@ model Payment {
 
   user    User    @relation(fields: [userId], references: [id])
   booking Booking @relation(fields: [bookingId], references: [id])
+
+  @@map("payments")
 }
 
 model Notification {
@@ -173,6 +179,8 @@ model Notification {
 
   admin Admin? @relation(fields: [adminId], references: [id])
   user  User?  @relation(fields: [userId], references: [id])
+
+  @@map("notifications")
 }
 
 model Review {
@@ -185,6 +193,8 @@ model Review {
 
   user    User    @relation(fields: [userId], references: [id])
   vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+
+  @@map("reviews")
 }
 
 model PasswordResetToken {
@@ -199,6 +209,8 @@ model PasswordResetToken {
   user  User?  @relation(fields: [userId], references: [id])
   admin Admin? @relation(fields: [adminId], references: [id])
   agent Agent? @relation(fields: [agentId], references: [id])
+
+  @@map("password_reset_tokens")
 }
 
 model UserMetric {
@@ -210,6 +222,8 @@ model UserMetric {
   driveHours   Int              @default(0)
 
   user User @relation(fields: [userId], references: [id])
+
+  @@map("user_metrics")
 }
 
 model AgentMetric {
@@ -220,6 +234,8 @@ model AgentMetric {
   issuesReported   Int    @default(0)
 
   agent Agent @relation(fields: [agentId], references: [id])
+
+  @@map("agent_metrics")
 }
 
 model AuditLog {
@@ -230,6 +246,8 @@ model AuditLog {
   target    String? // e.g. bookingId, userId
   metadata  Json?
   createdAt DateTime @default(now())
+
+  @@map("audit_logs")
 }
 
 model VehicleIssue {
@@ -244,4 +262,6 @@ model VehicleIssue {
   agent   Agent   @relation(fields: [agentId], references: [id])
   booking Booking @relation(fields: [bookingId], references: [id])
   vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+
+  @@map("vehicle_issues")
 }

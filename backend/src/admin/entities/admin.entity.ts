@@ -1,4 +1,4 @@
-import { PasswordResetToken, Role } from 'generated/prisma';
+import { PasswordResetToken, Role } from '@prisma/client';
 
 export class AdminEntity {
   id: string;

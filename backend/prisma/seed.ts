@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import * as bcrypt from 'bcrypt';
-import { PrismaClient, Role } from '../generated/prisma';
+import { PrismaClient, Role } from '@prisma/client';
 
 const prisma = new PrismaClient();
 

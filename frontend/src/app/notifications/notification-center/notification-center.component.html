@@ -1,7 +1,7 @@
-<h2>Notification Center</h2>
+<h2>Trung tâm thông báo</h2>
 
 <div *ngIf="notifications.length === 0">
-  <p>You have no notifications.</p>
+  <p>Bạn không có thông báo nào.</p>
 </div>
 
 <ul *ngIf="notifications.length > 0">
@@ -9,6 +9,5 @@
     <strong>{{ n.title }}</strong>
     <p>{{ n.message }}</p>
     <small>{{ n.createdAt | date:'short' }}</small>
-    <button *ngIf="!n.read" (click)="markAsRead(n.id)">Mark as read</button>
   </li>
 </ul>

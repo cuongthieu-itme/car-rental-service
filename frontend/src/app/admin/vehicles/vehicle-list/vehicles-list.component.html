@@ -1,30 +1,32 @@
-<div class="vehicle-list">
-  <h2>Manage Vehicles</h2>
-  <button routerLink="/admin/vehicles/create" class="create-btn">Add Vehicle</button>
+<h1>Quản lý xe</h1>
+<button routerLink="/admin/vehicles/create" class="create-btn">Thêm xe</button>
 
-  <div *ngIf="loading">Loading...</div>
+<div *ngIf="loading">Đang tải...</div>
 
-  <table *ngIf="!loading">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let vehicle of vehicles">
-        <td>{{ vehicle.id }}</td>
-        <td>{{ vehicle.make }}</td>
-        <td>{{ vehicle.model }}</td>
-        <td>{{ vehicle.status }}</td>
-        <td>
-          <button (click)="editVehicle(vehicle.id)">Edit</button>
-          <button (click)="deleteVehicle(vehicle.id)" class="delete">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<table *ngIf="!loading">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Hãng</th>
+      <th>Mẫu</th>
+      <th>Trạng thái</th>
+      <th>Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let vehicle of vehicles">
+      <td>{{ vehicle.id }}</td>
+      <td>{{ vehicle.make }}</td>
+      <td>{{ vehicle.model }}</td>
+      <td>{{ vehicle.status }}</td>
+      <td>
+        <button (click)="editVehicle(vehicle.id)">Sửa</button>
+        <button (click)="deleteVehicle(vehicle.id)" class="delete">Xóa</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!loading && vehicles.length === 0">
+  Không tìm thấy xe nào.
 </div>

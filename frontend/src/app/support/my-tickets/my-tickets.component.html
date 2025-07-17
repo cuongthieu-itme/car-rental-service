@@ -1,13 +1,12 @@
-<h2>My Support Tickets</h2>
-
+<h2>Yêu cầu hỗ trợ của tôi</h2>
 <div *ngIf="tickets.length === 0">
-  <p>No support tickets submitted yet.</p>
+  <p>Chưa có yêu cầu hỗ trợ nào được gửi.</p>
 </div>
 
 <ul *ngIf="tickets.length > 0">
-  <li *ngFor="let t of tickets">
-    <strong>{{ t.subject }}</strong>
-    <p>{{ t.message }}</p>
-    <small>Status: {{ t.status }}</small>
+  <li *ngFor="let ticket of tickets">
+    <h3>{{ ticket.subject }}</h3>
+    <p>{{ ticket.message }}</p>
+    <small>Trạng thái: {{ ticket.status }}</small>
   </li>
 </ul>

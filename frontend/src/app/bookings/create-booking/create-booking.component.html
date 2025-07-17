@@ -1,15 +1,15 @@
-<h2>Create Booking</h2>
+<h2>Đặt xe</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <label>Start Date</label>
+  <label>Ngày bắt đầu</label>
   <input type="date" formControlName="startDate" />
 
-  <label>End Date</label>
+  <label>Ngày kết thúc</label>
   <input type="date" formControlName="endDate" />
 
-  <label>Note (Optional)</label>
-  <textarea formControlName="note"></textarea>
+  <label>Ghi chú (Tùy chọn)</label>
+  <textarea formControlName="note" placeholder="Thêm ghi chú nếu cần"></textarea>
 
   <button type="submit" [disabled]="loading">
-    {{ loading ? 'Booking...' : 'Book Vehicle' }}
+    {{ loading ? 'Đang đặt xe...' : 'Đặt xe' }}
   </button>
 </form>

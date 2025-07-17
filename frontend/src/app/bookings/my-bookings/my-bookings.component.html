@@ -1,8 +1,19 @@
-<h2>My Bookings</h2>
-<div *ngIf="bookings.length === 0">You have no bookings yet.</div>
-<ul *ngIf="bookings.length > 0">
-  <li *ngFor="let booking of bookings">
-    <strong>{{ booking.vehicle.name }}</strong> - {{ booking.status }}
-    <a [routerLink]="['/bookings/detail', booking.id]">View Details</a>
-  </li>
-</ul>
+<h2>Lịch sử thuê xe của tôi</h2>
+
+<div *ngIf="bookings.length === 0">Bạn chưa có đặt xe nào.</div>
+
+<div *ngIf="bookings.length > 0" class="bookings-list">
+  <div class="booking-card" *ngFor="let booking of bookings">
+    <h3>Đặt xe #{{ booking.id?.substring(0, 8) }}</h3>
+    <p><strong>Xe:</strong> {{ booking.vehicle?.name }}</p>
+    <p><strong>Ngày nhận:</strong> {{ booking.pickupDate | date:'medium' }}</p>
+    <p><strong>Ngày trả:</strong> {{ booking.dropoffDate | date:'medium' }}</p>
+    <p><strong>Trạng thái:</strong> {{ booking.status }}</p>
+    <p><strong>Tổng tiền:</strong> ${{ booking.totalAmount | number:'1.2-2' }}</p>
+
+    <div class="booking-actions">
+      <button class="btn btn-view" (click)="viewBookingDetails(booking.id)">Xem chi tiết</button>
+      <button *ngIf="booking.status === 'PENDING'" class="btn btn-cancel" (click)="cancelBooking(booking.id)">Hủy đặt xe</button>
+    </div>
+  </div>
+</div>

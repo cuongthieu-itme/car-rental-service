@@ -47,15 +47,15 @@ export class RegisterComponent {
     this.authService.register(formData).subscribe({
       next: () => {
         this.loading = false;
-        alert('Registration successful! Please log in with your new account.');
+        alert('Đăng ký thành công! Vui lòng đăng nhập bằng tài khoản mới.');
         this.router.navigate(['/auth/login']);
       },
       error: (err: any) => {
         console.error('Registration error:', err);
         this.loading = false;
         alert(
-          'Registration failed: ' +
-            (err.error?.message || 'An unknown error occurred.')
+          'Đăng ký thất bại: ' +
+            (err.error?.message || 'Đã xảy ra lỗi không xác định.')
         );
       },
     });

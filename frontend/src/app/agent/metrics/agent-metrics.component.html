@@ -6,43 +6,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <div class="agent-metrics-container">
-  <h2>Agent Metrics</h2>
+  <h2>Thống kê đại lý</h2>
 
   <div *ngIf="!metrics" class="loading-message">
-    <i class="fas fa-spinner fa-spin"></i> Loading agent metrics...
+    <i class="fas fa-spinner fa-spin"></i> Đang tải thống kê đại lý...
   </div>
 
   <div *ngIf="metrics" class="metrics-content">
-    <section class="summary-cards-section">
-      <h3>Performance Overview</h3>
-      <div class="summary-cards-grid">
-        <div class="summary-card">
-          <div class="icon-wrapper"><i class="fas fa-clipboard-list"></i></div>
-          <div class="card-info">
-            <span class="card-value">{{ metrics.bookingsHandled || 0 }}</span>
-            <span class="card-label">Bookings Handled</span>
-          </div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="icon-wrapper"><i class="fas fa-book"></i></div>
+        <div class="metric-info">
+          <span class="metric-value">{{ metrics.totalBookings || 0 }}</span>
+          <span class="metric-label">Tổng đặt xe</span>
         </div>
-        <div class="summary-card">
-          <div class="icon-wrapper"><i class="fas fa-undo-alt"></i></div>
-          <div class="card-info">
-            <span class="card-value">{{ metrics.vehiclesReturned || 0 }}</span>
-            <span class="card-label">Vehicles Returned</span>
-          </div>
-        </div>
-        <div class="summary-card">
-          <div class="icon-wrapper"><i class="fas fa-exclamation-circle"></i></div>
-          <div class="card-info">
-            <span class="card-value">{{ metrics.issuesReported || 0 }}</span>
-            <span class="card-label">Issues Reported</span>
-          </div>
-        </div>
-        <!-- Add more metric cards if your AgentMetric model expands -->
       </div>
-    </section>
 
-    <!-- You can add more sections here if your agent metrics become more complex,
-         e.g., charts, historical data, etc. -->
+      <div class="metric-card">
+        <div class="icon-wrapper"><i class="fas fa-check-circle"></i></div>
+        <div class="metric-info">
+          <span class="metric-value">{{ metrics.completedBookings || 0 }}</span>
+          <span class="metric-label">Đặt xe hoàn thành</span>
+        </div>
+      </div>
 
+      <div class="metric-card">
+        <div class="icon-wrapper"><i class="fas fa-clock"></i></div>
+        <div class="metric-info">
+          <span class="metric-value">{{ metrics.pendingBookings || 0 }}</span>
+          <span class="metric-label">Đặt xe chờ xử lý</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="icon-wrapper"><i class="fas fa-dollar-sign"></i></div>
+        <div class="metric-info">
+          <span class="metric-value">${{ metrics.totalEarnings | number:'1.2-2' || '0.00' }}</span>
+          <span class="metric-label">Tổng thu nhập</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

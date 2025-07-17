@@ -1,5 +1,5 @@
-<h2>Your Activity</h2>
-<div *ngIf="metrics">
-  <p>Total Bookings: {{ metrics.totalBookings }}</p>
-  <p>Total Spent: {{ metrics.totalSpent | currency }}</p>
-</div>
+<h2>Thống kê của tôi</h2>
+<p>Tổng số đặt xe: {{ metrics.totalBookings }}</p>
+<p>Số xe đã thuê: {{ metrics.completedBookings }}</p>
+<p>Tổng chi tiêu: ${{ metrics.totalSpent | number:'1.2-2' }}</p>
+<p>Điểm tích lũy: {{ metrics.loyaltyPoints }}</p>

@@ -12,36 +12,36 @@
 />
 
 <div class="admin-dashboard-container">
-  <h2>Admin Dashboard</h2>
+  <h2>Bảng điều khiển quản trị</h2>
 
   <div *ngIf="loading" class="loading-message">
-    <i class="fas fa-spinner fa-spin"></i> Loading dashboard data...
+    <i class="fas fa-spinner fa-spin"></i> Đang tải dữ liệu bảng điều khiển...
   </div>
 
   <div *ngIf="!loading" class="dashboard-content">
     <!-- Overall Statistics Section -->
     <section class="stats-cards-section">
-      <h3>Overall Statistics</h3>
+      <h3>Thống kê tổng quan</h3>
       <div class="stats-cards-grid">
         <div class="stat-card">
           <div class="icon-wrapper"><i class="fas fa-users"></i></div>
           <div class="card-info">
             <span class="card-value">{{ stats.totalUsers || 0 }}</span>
-            <span class="card-label">Total Users</span>
+            <span class="card-label">Tổng người dùng</span>
           </div>
         </div>
         <div class="stat-card">
           <div class="icon-wrapper"><i class="fas fa-car-side"></i></div>
           <div class="card-info">
             <span class="card-value">{{ stats.totalVehicles || 0 }}</span>
-            <span class="card-label">Total Vehicles</span>
+            <span class="card-label">Tổng số xe</span>
           </div>
         </div>
         <div class="stat-card">
           <div class="icon-wrapper"><i class="fas fa-book"></i></div>
           <div class="card-info">
             <span class="card-value">{{ stats.totalBookings || 0 }}</span>
-            <span class="card-label">Total Bookings</span>
+            <span class="card-label">Tổng đặt xe</span>
           </div>
         </div>
         <div class="stat-card">
@@ -54,7 +54,7 @@
                   : "0.00"
               }}
             </span>
-            <span class="card-label">Total Revenue</span>
+            <span class="card-label">Tổng doanh thu</span>
           </div>
         </div>
       </div>
@@ -62,55 +62,53 @@
 
     <!-- Recent Activity / Alerts Section -->
     <section class="recent-activity-section">
-      <h3>Recent Activity & Alerts</h3>
+      <h3>Hoạt động gần đây & Cảnh báo</h3>
       <div class="activity-grid">
         <div class="activity-card">
-          <h4><i class="fas fa-clock"></i> Pending Bookings</h4>
+          <h4><i class="fas fa-clock"></i> Đặt xe chờ duyệt</h4>
           <p *ngIf="stats.pendingBookings === 0" class="no-data-message">
-            No pending bookings.
+            Không có đặt xe chờ duyệt.
           </p>
           <ul *ngIf="stats.pendingBookings > 0">
             <li>
-              <strong>{{ stats.pendingBookings }}</strong> new bookings awaiting
-              confirmation.
+              <strong>{{ stats.pendingBookings }}</strong> đặt xe mới đang chờ xác nhận.
             </li>
             <!-- You could loop through an array like stats.recentPendingBookings here -->
           </ul>
           <button *ngIf="stats.pendingBookings > 0" class="btn btn-view-all">
-            View All Pending
+            Xem tất cả chờ duyệt
           </button>
         </div>
 
         <div class="activity-card">
-          <h4><i class="fas fa-exclamation-triangle"></i> Open Issues</h4>
+          <h4><i class="fas fa-exclamation-triangle"></i> Vấn đề chưa giải quyết</h4>
           <p *ngIf="stats.openIssues === 0" class="no-data-message">
-            No open issues.
+            Không có vấn đề chưa giải quyết.
           </p>
           <ul *ngIf="stats.openIssues > 0">
             <li>
-              <strong>{{ stats.openIssues }}</strong> vehicle issues reported.
+              <strong>{{ stats.openIssues }}</strong> vấn đề xe đã được báo cáo.
             </li>
             <!-- You could loop through an array like stats.recentOpenIssues here -->
           </ul>
           <button *ngIf="stats.openIssues > 0" class="btn btn-view-all">
-            View All Issues
+            Xem tất cả vấn đề
           </button>
         </div>
 
         <div class="activity-card">
-          <h4><i class="fas fa-user-plus"></i> New Registrations</h4>
+          <h4><i class="fas fa-user-plus"></i> Đăng ký mới</h4>
           <p *ngIf="stats.newUsersToday === 0" class="no-data-message">
-            No new users today.
+            Không có người dùng mới hôm nay.
           </p>
           <ul *ngIf="stats.newUsersToday > 0">
             <li>
-              <strong>{{ stats.newUsersToday }}</strong> new users registered
-              today.
+              <strong>{{ stats.newUsersToday }}</strong> người dùng mới đăng ký hôm nay.
             </li>
             <!-- You could loop through an array like stats.recentNewUsers here -->
           </ul>
           <button *ngIf="stats.newUsersToday > 0" class="btn btn-view-all">
-            View All Users
+            Xem tất cả người dùng
           </button>
         </div>
       </div>
@@ -118,19 +116,19 @@
 
     <!-- Quick Actions Section -->
     <section class="quick-actions-section">
-      <h3>Quick Actions</h3>
+      <h3>Thao tác nhanh</h3>
       <div class="actions-grid">
         <button class="action-btn">
-          <i class="fas fa-plus-circle"></i> Add New Vehicle
+          <i class="fas fa-plus-circle"></i> Thêm xe mới
         </button>
         <button class="action-btn">
-          <i class="fas fa-user-shield"></i> Manage Agents
+          <i class="fas fa-user-shield"></i> Quản lý đại lý
         </button>
         <button class="action-btn">
-          <i class="fas fa-envelope"></i> Send Notification
+          <i class="fas fa-envelope"></i> Gửi thông báo
         </button>
         <button class="action-btn">
-          <i class="fas fa-chart-line"></i> View Detailed Reports
+          <i class="fas fa-chart-line"></i> Xem báo cáo chi tiết
         </button>
       </div>
     </section>

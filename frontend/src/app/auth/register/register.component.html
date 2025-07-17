@@ -1,30 +1,30 @@
 <div class="register-container">
-  <h2>Register New Account</h2>
+  <h2>Đăng ký tài khoản mới</h2>
   <form [formGroup]="form" (ngSubmit)="submit()">
 
     <div class="form-group">
-      <label for="name">Full Name</label>
-      <input id="name" type="text" formControlName="name" placeholder="Your Full Name" />
+      <label for="name">Họ và tên</label>
+      <input id="name" type="text" formControlName="name" placeholder="Nhập họ và tên của bạn" />
       <app-form-error [control]="form.get('name')!" />
     </div>
 
     <div class="form-group">
-      <label for="email">Email Address</label>
-      <input id="email" type="email" formControlName="email" placeholder="you@example.com" />
+      <label for="email">Địa chỉ Email</label>
+      <input id="email" type="email" formControlName="email" placeholder="email@example.com" />
       <app-form-error [control]="form.get('email')!" />
     </div>
 
     <div class="form-group">
-      <label for="password">Password</label>
-      <input id="password" type="password" formControlName="password" placeholder="Choose a strong password" />
+      <label for="password">Mật khẩu</label>
+      <input id="password" type="password" formControlName="password" placeholder="Tạo mật khẩu mạnh" />
       <app-form-error [control]="form.get('password')!" />
     </div>
 
-    <button type="submit" [disabled]="loading">Register</button>
+    <button type="submit" [disabled]="loading">Đăng ký</button>
 
     <div class="form-footer">
       <p>
-        Already have an account? <a (click)="onBookNowClick()">Login here</a>
+        Đã có tài khoản? <a (click)="onBookNowClick()">Đăng nhập tại đây</a>
       </p>
     </div>
   </form>

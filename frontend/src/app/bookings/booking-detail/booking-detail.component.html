@@ -1,8 +1,31 @@
-<h2>Booking Detail</h2>
-<div *ngIf="booking">
-  <p><strong>Vehicle:</strong> {{ booking.vehicle.name }}</p>
-  <p><strong>Start:</strong> {{ booking.startDate | date }}</p>
-  <p><strong>End:</strong> {{ booking.endDate | date }}</p>
-  <p><strong>Status:</strong> {{ booking.status }}</p>
-  <p><strong>Note:</strong> {{ booking.note || 'N/A' }}</p>
+<h2>Chi tiết đặt xe</h2>
+
+<div *ngIf="booking" class="booking-detail">
+  <div class="booking-info">
+    <h3>Thông tin đặt xe</h3>
+    <p><strong>Mã đặt xe:</strong> {{ booking.id }}</p>
+    <p><strong>Xe:</strong> {{ booking.vehicle?.name }}</p>
+    <p><strong>Ngày nhận:</strong> {{ booking.pickupDate | date:'full' }}</p>
+    <p><strong>Ngày trả:</strong> {{ booking.dropoffDate | date:'full' }}</p>
+    <p><strong>Trạng thái:</strong> {{ booking.status }}</p>
+    <p><strong>Ghi chú:</strong> {{ booking.note || 'Không có' }}</p>
+    <p><strong>Tổng tiền:</strong> ${{ booking.totalAmount | number:'1.2-2' }}</p>
+  </div>
+
+  <div class="vehicle-info" *ngIf="booking.vehicle">
+    <h3>Thông tin xe</h3>
+    <p><strong>Tên xe:</strong> {{ booking.vehicle.name }}</p>
+    <p><strong>Hãng:</strong> {{ booking.vehicle.make }}</p>
+    <p><strong>Mẫu:</strong> {{ booking.vehicle.model }}</p>
+    <p><strong>Loại xe:</strong> {{ booking.vehicle.category }}</p>
+  </div>
+
+  <div class="booking-actions">
+    <button class="btn btn-back" (click)="goBack()">Quay lại</button>
+    <button *ngIf="booking.status === 'PENDING'" class="btn btn-cancel" (click)="cancelBooking()">Hủy đặt xe</button>
+  </div>
+</div>
+
+<div *ngIf="!booking" class="loading">
+  Đang tải thông tin đặt xe...
 </div>

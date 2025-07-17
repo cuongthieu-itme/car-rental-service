@@ -1,34 +1,43 @@
-<h2>All Bookings</h2>
-
-<div *ngIf="loading">Loading bookings...</div>
+<h1>Quản lý đặt xe</h1>
+<div *ngIf="loading">Đang tải danh sách đặt xe...</div>
 
 <table *ngIf="!loading && bookings.length > 0">
   <thead>
     <tr>
       <th>ID</th>
-      <th>User</th>
-      <th>Vehicle</th>
-      <th>Date</th>
-      <th>Status</th>
-      <th>Action</th>
+      <th>Người dùng</th>
+      <th>Xe</th>
+      <th>Ngày nhận</th>
+      <th>Ngày trả</th>
+      <th>Trạng thái</th>
+      <th>Tổng tiền</th>
+      <th>Thao tác</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let booking of bookings">
-      <td>{{ booking.id }}</td>
-      <td>{{ booking.user?.name }}</td>
-      <td>{{ booking.vehicle?.brand }} {{ booking.vehicle?.model }}</td>
-      <td>{{ booking.date | date }}</td>
-      <td>{{ booking.status }}</td>
+      <td>{{ booking.id?.substring(0, 8) }}...</td>
+      <td>{{ booking.user?.email || 'N/A' }}</td>
+      <td>{{ booking.vehicle?.name || 'N/A' }}</td>
+      <td>{{ booking.pickupDate | date:'short' }}</td>
+      <td>{{ booking.dropoffDate | date:'short' }}</td>
       <td>
-        <button *ngIf="booking.status !== 'CANCELLED'" (click)="cancelBooking(booking.id)">
-          Cancel
-        </button>
+        <span class="status" [ngClass]="booking.status | lowercase">
+          {{ booking.status }}
+        </span>
+      </td>
+      <td>${{ booking.totalAmount | number:'1.2-2' }}</td>
+      <td>
+        <button class="btn btn-view" (click)="viewBooking(booking.id)">Xem</button>
+        <button class="btn btn-edit" (click)="editBooking(booking.id)">Sửa</button>
+        <button *ngIf="booking.status === 'PENDING'" class="btn btn-approve" (click)="approveBooking(booking.id)">Duyệt</button>
+        <button *ngIf="booking.status === 'PENDING'" class="btn btn-reject" (click)="rejectBooking(booking.id)">Từ chối</button>
+        <button class="btn btn-delete" (click)="deleteBooking(booking.id)">Xóa</button>
       </td>
     </tr>
   </tbody>
 </table>
 
 <div *ngIf="!loading && bookings.length === 0">
-  No bookings found.
+  Không tìm thấy đặt xe nào.
 </div>

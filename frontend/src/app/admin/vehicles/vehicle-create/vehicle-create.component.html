@@ -1,20 +1,19 @@
 <div class="vehicle-create">
-    <h2>Add New Vehicle</h2>
+    <h2>Thêm xe mới</h2>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <label>Make</label>
-      <input formControlName="make" type="text" required />
-  
-      <label>Model</label>
-      <input formControlName="model" type="text" required />
-  
-      <label>Status</label>
+      <label>Hãng xe</label>
+      <input formControlName="make" type="text" required placeholder="Nhập hãng xe" />
+
+      <label>Mẫu xe</label>
+      <input formControlName="model" type="text" required placeholder="Nhập mẫu xe" />
+
+      <label>Trạng thái</label>
       <select formControlName="status">
-        <option value="AVAILABLE">Available</option>
-        <option value="RENTED">Rented</option>
-        <option value="MAINTENANCE">Maintenance</option>
+        <option value="AVAILABLE">Có sẵn</option>
+        <option value="RENTED">Đã thuê</option>
+        <option value="MAINTENANCE">Bảo trì</option>
       </select>
-  
-      <button type="submit">Create Vehicle</button>
+
+      <button type="submit">Tạo xe</button>
     </form>
   </div>
-  

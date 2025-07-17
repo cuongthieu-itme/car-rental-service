@@ -13,16 +13,16 @@
   <!-- Top Bar & Navbar -->
   <header class="top-header">
     <div class="top-bar">
-      <div class="logo">Trator</div>
-      <div class="location"><i class="fas fa-map-marker-alt"></i> Location</div>
+      <div class="logo">AutoRent</div>
+      <div class="location"><i class="fas fa-map-marker-alt"></i> Vị trí</div>
     </div>
     <nav class="navbar">
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#vehicles">Vehicles</a></li>
-        <li><a href="#client">Feedback</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#home">Trang chủ</a></li>
+        <li><a href="#about">Về chúng tôi</a></li>
+        <li><a href="#vehicles">Xe cho thuê</a></li>
+        <li><a href="#client">Đánh giá</a></li>
+        <li><a href="#contact">Liên hệ</a></li>
       </ul>
     </nav>
   </header>
@@ -30,19 +30,19 @@
   <!-- Hero Section -->
   <section class="hero-section" id="home">
     <div class="hero-content">
-      <h1>Car Rent for You</h1>
+      <h1>Dịch vụ cho thuê xe dành cho bạn</h1>
       <p>
-        There are many variations of passages of Lorem Ipsum available, but the
-        majority have suffered alteration in some form, by injected humour, or
-        randomised words which don't look even slightly believable.
+        Chúng tôi cung cấp dịch vụ cho thuê xe uy tín với đa dạng loại xe,
+        giá cả phải chăng và chất lượng dịch vụ tốt nhất. Hãy để chúng tôi
+        đồng hành cùng bạn trong mọi chuyến đi.
       </p>
       <div class="hero-buttons">
-        <button class="btn btn-primary">Read More</button>
-        <button class="btn btn-secondary">Contact Us</button>
+        <button class="btn btn-primary">Xem thêm</button>
+        <button class="btn btn-secondary">Liên hệ ngay</button>
       </div>
     </div>
     <div class="hero-image">
-      <img src="../../../public/images/about-img.png" alt="Hero Car" />
+      <img src="../../../public/images/about-img.png" alt="Xe cho thuê" />
     </div>
     <div class="hero-arrow left-arrow"><i class="fas fa-chevron-left"></i></div>
     <div class="hero-arrow right-arrow">
@@ -55,80 +55,76 @@
     <div class="about-image">
       <img
         src="../../../public/images/about-img.png"
-        alt="About Car"
+        alt="Về AutoRent"
       />
     </div>
     <div class="about-content">
-      <h2>ABOUT US</h2>
+      <h2>VỀ CHÚNG TÔI</h2>
       <p>
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page. The point of using Lorem Ipsum is that it
-        has a more-or-less normal distribution of letters, as opposed to using
-        'Content here, content here', making it look like readable English. Many
-        desktop publishing packages and web page editors now use Lorem Ipsum as
-        their default model text, and a search for 'lorem ipsum' will uncover
-        many web sites still in their infancy. Various versions have evolved
-        over the years, sometimes by accident, sometimes on purpose (injected
-        humour and the like).
+        AutoRent là công ty cho thuê xe hàng đầu với nhiều năm kinh nghiệm trong ngành.
+        Chúng tôi cam kết mang đến cho khách hàng những chiếc xe chất lượng cao,
+        dịch vụ tận tâm và giá cả cạnh tranh. Đội ngũ nhân viên chuyên nghiệp của
+        chúng tôi luôn sẵn sàng hỗ trợ bạn 24/7 để đảm bảo chuyến đi của bạn được
+        thuận lợi và an toàn nhất.
       </p>
-      <button class="btn btn-primary">Read More</button>
+      <button class="btn btn-primary">Tìm hiểu thêm</button>
     </div>
   </section>
 
   <!-- Search Your Best Cars Section -->
   <section class="search-cars-section">
-    <h2>Search Your Best Cars</h2>
+    <h2>Tìm kiếm xe phù hợp</h2>
     <p>
-      It is a long established fact that a reader will be distracted by the
-      readable content of a page.
+      Hãy sử dụng bộ lọc tìm kiếm để tìm được chiếc xe phù hợp nhất
+      với nhu cầu và ngân sách của bạn.
     </p>
     <div class="search-filters">
-      <input type="text" placeholder="Any Brand" />
-      <input type="text" placeholder="Any Type" />
-      <input type="text" placeholder="Price" />
-      <button class="btn btn-search">SEARCH NOW</button>
+      <input type="text" placeholder="Hãng xe" />
+      <input type="text" placeholder="Loại xe" />
+      <input type="text" placeholder="Giá cả" />
+      <button class="btn btn-search">TÌM KIẾM NGAY</button>
     </div>
   </section>
 
   <!-- Our Best Offers Section -->
   <section class="best-offers-section" id="vehicles">
-    <h2>OUR BEST OFFERS</h2>
+    <h2>ƯU ĐÃI TỐT NHẤT</h2>
     <div class="car-grid">
       <div class="car-card" *ngFor="let car of cars">
-        <img [src]="car.imageUrl" alt="Car Image" />
+        <img [src]="car.imageUrl" alt="Hình ảnh xe" />
         <h3>{{ car.name }}</h3>
-        <p>Start per day ${{ car.price | number : "1.2-2" }}</p>
-        <button class="btn btn-offer" (click)="onBookNowClick()">BOOK NOW</button>
+        <p>Từ ${{ car.price | number : "1.2-2" }} / ngày</p>
+        <button class="btn btn-offer" (click)="onBookNowClick()">ĐẶT NGAY</button>
       </div>
     </div>
   </section>
 
   <!-- Why Choose Us Section -->
   <section class="why-choose-us-section">
-    <h2>WHY CHOOSE US</h2>
+    <h2>TẠI SAO CHỌN CHÚNG TÔI</h2>
     <div class="features-grid">
       <div class="feature-card">
         <div class="icon-circle"><i class="fas fa-shield-alt"></i></div>
-        <h3>SAFETY & SECURITY</h3>
+        <h3>AN TOÀN & BẢO MẬT</h3>
         <p>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page.
+          Tất cả các xe của chúng tôi đều được bảo trì định kỳ và
+          có bảo hiểm đầy đủ để đảm bảo an toàn cho khách hàng.
         </p>
       </div>
       <div class="feature-card">
         <div class="icon-circle"><i class="fas fa-book"></i></div>
-        <h3>Online Booking</h3>
+        <h3>Đặt xe trực tuyến</h3>
         <p>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page.
+          Hệ thống đặt xe trực tuyến tiện lợi, nhanh chóng và
+          dễ dàng sử dụng, giúp bạn tiết kiệm thời gian.
         </p>
       </div>
       <div class="feature-card">
         <div class="icon-circle"><i class="fas fa-user-tie"></i></div>
-        <h3>Best Drivers</h3>
+        <h3>Tài xế chuyên nghiệp</h3>
         <p>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page.
+          Đội ngũ tài xế có kinh nghiệm lâu năm, thân thiện và
+          am hiểu địa phương sẽ đảm bảo chuyến đi tốt nhất.
         </p>
       </div>
     </div>
@@ -136,7 +132,7 @@
 
   <!-- What Says Customers Section -->
   <section class="testimonials-section" id="client">
-    <h2>WHAT SAYS CUSTOMERS</h2>
+    <h2>KHÁCH HÀNG NÓI GÌ VỀ CHÚNG TÔI</h2>
     <div class="testimonials-carousel">
       <button
         class="carousel-arrow left-arrow"
@@ -146,14 +142,14 @@
       </button>
       <div class="testimonials-cards-container">
         <div class="testimonial-card" *ngFor="let testimonial of testimonials">
-          <img [src]="testimonial.imageUrl" alt="Customer Photo" />
+          <img [src]="testimonial.imageUrl" alt="Ảnh khách hàng" />
           <h3>{{ testimonial.name }}</h3>
           <p class="quote-icon">"</p>
           <p>{{ testimonial.quote }}</p>
         </div>
         <!-- Duplicate for visual effect if needed, or implement a proper carousel library -->
         <div class="testimonial-card" *ngFor="let testimonial of testimonials">
-          <img [src]="testimonial.imageUrl" alt="Customer Photo" />
+          <img [src]="testimonial.imageUrl" alt="Ảnh khách hàng" />
           <h3>{{ testimonial.name }}</h3>
           <p class="quote-icon">"</p>
           <p>{{ testimonial.quote }}</p>
@@ -170,11 +166,11 @@
 
   <!-- Get In Touch Section -->
   <section class="contact-section" id="contact">
-    <h2>GET IN TOUCH</h2>
+    <h2>LIÊN HỆ VỚI CHÚNG TÔI</h2>
     <form (ngSubmit)="onSubmitContactForm()">
       <input
         type="text"
-        placeholder="Name"
+        placeholder="Họ và tên"
         [(ngModel)]="contactForm.name"
         name="name"
         required
@@ -188,17 +184,17 @@
       />
       <input
         type="tel"
-        placeholder="Phone Number"
+        placeholder="Số điện thoại"
         [(ngModel)]="contactForm.phone"
         name="phone"
       />
       <textarea
-        placeholder="Message"
+        placeholder="Tin nhắn"
         [(ngModel)]="contactForm.message"
         name="message"
         required
       ></textarea>
-      <button type="submit" class="btn btn-send">SEND</button>
+      <button type="submit" class="btn btn-send">GỬI TIN NHẮN</button>
     </form>
   </section>
 
@@ -206,43 +202,43 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-column subscribe">
-        <h3>Trator</h3>
-        <h4>Subscribe Now</h4>
-        <input type="email" placeholder="Enter your email" />
-        <button class="btn btn-subscribe">SUBSCRIBE</button>
+        <h3>AutoRent</h3>
+        <h4>Đăng ký nhận tin</h4>
+        <input type="email" placeholder="Nhập email của bạn" />
+        <button class="btn btn-subscribe">ĐĂNG KÝ</button>
       </div>
       <div class="footer-column">
-        <h4>Information</h4>
+        <h4>Thông tin</h4>
         <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Our Team</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Về chúng tôi</a></li>
+          <li><a href="#">Dịch vụ</a></li>
+          <li><a href="#">Đội ngũ</a></li>
+          <li><a href="#">Bảng giá</a></li>
+          <li><a href="#">Liên hệ</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h4>Helpful Links</h4>
+        <h4>Liên kết hữu ích</h4>
         <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms & Conditions</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Chính sách bảo mật</a></li>
+          <li><a href="#">Điều khoản & Điều kiện</a></li>
+          <li><a href="#">Hỗ trợ</a></li>
+          <li><a href="#">Câu hỏi thường gặp</a></li>
         </ul>
       </div>
       <div class="footer-column">
-        <h4>Investments</h4>
+        <h4>Đầu tư</h4>
         <ul>
-          <li><a href="#">Investment Plans</a></li>
-          <li><a href="#">Financial Reports</a></li>
-          <li><a href="#">Partnerships</a></li>
+          <li><a href="#">Kế hoạch đầu tư</a></li>
+          <li><a href="#">Báo cáo tài chính</a></li>
+          <li><a href="#">Đối tác</a></li>
         </ul>
       </div>
       <div class="footer-column contact-info">
-        <h4>Contact Us</h4>
-        <p><i class="fas fa-map-marker-alt"></i> Location</p>
-        <p><i class="fas fa-phone"></i> +01 1234567890</p>
-        <p><i class="fas fa-envelope"></i> demo&#64;gmail.com</p>
+        <h4>Liên hệ</h4>
+        <p><i class="fas fa-map-marker-alt"></i> Địa chỉ</p>
+        <p><i class="fas fa-phone"></i> +84 123 456 789</p>
+        <p><i class="fas fa-envelope"></i> info&#64;autorent.vn</p>
         <div class="social-icons">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
           <a href="#"><i class="fab fa-twitter"></i></a>
@@ -253,7 +249,7 @@
     </div>
     <div class="footer-bottom">
       <p>
-        &copy; 2025 All Rights Reserved. Design by MSL
+        &copy; 2025 Bản quyền thuộc về AutoRent. Thiết kế bởi MSL
       </p>
     </div>
   </footer>

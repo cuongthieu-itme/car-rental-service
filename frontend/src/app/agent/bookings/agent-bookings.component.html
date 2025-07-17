@@ -6,38 +6,38 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <div class="agent-bookings-container">
-  <h2>Agent Bookings</h2>
+  <h2>Quản lý đặt xe</h2>
 
   <div *ngIf="!bookings" class="loading-message">
-    <i class="fas fa-spinner fa-spin"></i> Loading bookings...
+    <i class="fas fa-spinner fa-spin"></i> Đang tải danh sách đặt xe...
   </div>
 
   <div *ngIf="bookings" class="bookings-content">
     <div *ngIf="bookings.length === 0" class="no-bookings-message">
-      <p>No bookings to display.</p>
+      <p>Không có đặt xe nào để hiển thị.</p>
     </div>
 
     <div *ngIf="bookings.length > 0" class="booking-grid">
       <div class="booking-card" *ngFor="let booking of bookings">
-        <div class="card-header">
-          <h4>Booking ID: {{ booking.id?.substring(0, 8) || 'N/A' }}...</h4>
+        <div class="booking-header">
+          <h4>Mã đặt xe: {{ booking.id?.substring(0, 8) || 'N/A' }}...</h4>
           <span class="status {{ booking.status | lowercase }}">{{ booking.status }}</span>
         </div>
-        <div class="card-body">
-          <p><strong>Vehicle:</strong> {{ booking.vehicle?.name || 'N/A' }}</p>
-          <p><strong>User:</strong> {{ booking.user?.email || 'N/A' }}</p>
-          <p><strong>Pickup Date:</strong> {{ booking.pickupDate | date:'medium' }}</p>
-          <p><strong>Dropoff Date:</strong> {{ booking.dropoffDate | date:'medium' }}</p>
-          <p><strong>Total Amount:</strong> ${{ booking.totalAmount | number:'1.2-2' }}</p>
-          <p *ngIf="booking.agentId"><strong>Assigned Agent:</strong> {{ booking.agentId?.substring(0, 8) || 'N/A' }}...</p>
-          <p *ngIf="booking.options"><strong>Options:</strong> {{ booking.options | json }}</p>
+        <div class="booking-details">
+          <p><strong>Xe:</strong> {{ booking.vehicle?.name || 'N/A' }}</p>
+          <p><strong>Người dùng:</strong> {{ booking.user?.email || 'N/A' }}</p>
+          <p><strong>Ngày nhận:</strong> {{ booking.pickupDate | date:'medium' }}</p>
+          <p><strong>Ngày trả:</strong> {{ booking.dropoffDate | date:'medium' }}</p>
+          <p><strong>Tổng tiền:</strong> ${{ booking.totalAmount | number:'1.2-2' }}</p>
+          <p *ngIf="booking.agentId"><strong>Đại lý phụ trách:</strong> {{ booking.agentId?.substring(0, 8) || 'N/A' }}...</p>
+          <p *ngIf="booking.options"><strong>Tùy chọn:</strong> {{ booking.options | json }}</p>
         </div>
-        <div class="card-actions">
-          <button class="btn btn-view-details"><i class="fas fa-info-circle"></i> Details</button>
-          <button *ngIf="booking.status === 'PENDING'" class="btn btn-confirm"><i class="fas fa-check"></i> Confirm</button>
-          <button *ngIf="booking.status === 'PENDING'" class="btn btn-reject"><i class="fas fa-times"></i> Reject</button>
-          <button *ngIf="booking.status === 'CONFIRMED'" class="btn btn-complete"><i class="fas fa-car-alt"></i> Complete</button>
-          <button *ngIf="booking.status === 'CONFIRMED'" class="btn btn-cancel"><i class="fas fa-ban"></i> Cancel</button>
+        <div class="booking-actions">
+          <button class="btn btn-view-details"><i class="fas fa-info-circle"></i> Chi tiết</button>
+          <button *ngIf="booking.status === 'PENDING'" class="btn btn-confirm"><i class="fas fa-check"></i> Xác nhận</button>
+          <button *ngIf="booking.status === 'PENDING'" class="btn btn-reject"><i class="fas fa-times"></i> Từ chối</button>
+          <button *ngIf="booking.status === 'CONFIRMED'" class="btn btn-complete"><i class="fas fa-car-alt"></i> Hoàn thành</button>
+          <button *ngIf="booking.status === 'CONFIRMED'" class="btn btn-cancel"><i class="fas fa-ban"></i> Hủy bỏ</button>
         </div>
       </div>
     </div>

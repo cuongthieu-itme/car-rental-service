@@ -6,10 +6,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <div class="vehicle-list-container">
-  <h2>Our Available Vehicles</h2>
+  <h2>Xe có sẵn của chúng tôi</h2>
 
   <div *ngIf="loading" class="loading-message">
-    <i class="fas fa-spinner fa-spin"></i> Loading vehicles...
+    <i class="fas fa-spinner fa-spin"></i> Đang tải xe...
   </div>
 
   <div *ngIf="error" class="error-message">
@@ -17,19 +17,19 @@
   </div>
 
   <div *ngIf="!loading && !error && vehicles.length === 0" class="no-vehicles-message">
-    <p>No vehicles found. Perhaps add one?</p>
+    <p>Không tìm thấy xe nào. Có thể thêm xe mới?</p>
   </div>
 
   <div class="vehicle-grid" *ngIf="!loading && !error && vehicles.length > 0">
     <div class="vehicle-card" *ngFor="let vehicle of vehicles">
-      <img [src]="vehicle.imageUrl || 'https://placehold.co/400x250/cccccc/000000?text=No+Image'" alt="{{ vehicle.name }}">
+      <img [src]="vehicle.imageUrl || 'https://placehold.co/400x250/cccccc/000000?text=Không+có+ảnh'" alt="{{ vehicle.name }}">
       <div class="card-content">
         <h3>{{ vehicle.name }}</h3>
         <p class="category">{{ vehicle.category }}</p>
         <p class="description">{{ vehicle.description }}</p>
         <div class="price-info">
-          <span>${{ vehicle.pricePerDay | number:'1.2-2' }} / day</span>
-          <span>${{ vehicle.pricePerHour | number:'1.2-2' }} / hour</span>
+          <span>${{ vehicle.pricePerDay | number:'1.2-2' }} / ngày</span>
+          <span>${{ vehicle.pricePerHour | number:'1.2-2' }} / giờ</span>
         </div>
         <div class="details-row">
           <span><i class="fas fa-map-marker-alt"></i> {{ vehicle.location }}</span>
@@ -40,8 +40,8 @@
           <span *ngFor="let feature of vehicle.features"><i class="fas fa-check-circle"></i> {{ feature }}</span>
         </div>
         <div class="card-actions">
-          <button class="btn btn-primary" (click)="viewDetails(vehicle)">View Details</button>
-          <button class="btn btn-book" (click)="bookVehicle(vehicle)">Book Now</button>
+          <button class="btn btn-primary" (click)="viewDetails(vehicle)">Xem chi tiết</button>
+          <button class="btn btn-book" (click)="bookVehicle(vehicle)">Đặt ngay</button>
         </div>
       </div>
     </div>

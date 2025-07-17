@@ -1,14 +1,14 @@
-<h2>Create Support Ticket</h2>
+<h2>Tạo yêu cầu hỗ trợ</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <label>Subject</label>
-  <input formControlName="subject" type="text" />
+  <label>Tiêu đề</label>
+  <input formControlName="subject" type="text" placeholder="Nhập tiêu đề yêu cầu" />
   <app-form-error [control]="form.get('subject')!" />
 
-  <label>Message</label>
-  <textarea formControlName="message"></textarea>
+  <label>Nội dung</label>
+  <textarea formControlName="message" placeholder="Mô tả chi tiết vấn đề của bạn"></textarea>
   <app-form-error [control]="form.get('message')!" />
 
   <button type="submit" [disabled]="loading">
-    {{ loading ? 'Submitting...' : 'Submit Ticket' }}
+    {{ loading ? 'Đang gửi...' : 'Gửi yêu cầu' }}
   </button>
 </form>

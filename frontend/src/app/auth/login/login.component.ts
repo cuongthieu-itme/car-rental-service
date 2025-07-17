@@ -67,8 +67,10 @@ export class LoginComponent {
       },
       error: (err) => {
         alert(
-          'Login failed: ' +
-            (err.error?.message || err.message || 'An unknown error occurred.')
+          'Đăng nhập thất bại: ' +
+            (err.error?.message ||
+              err.message ||
+              'Đã xảy ra lỗi không xác định.')
         ); // Improved error message
         this.loading = false;
       },

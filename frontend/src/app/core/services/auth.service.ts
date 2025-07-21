@@ -7,7 +7,7 @@ import { TokenService } from './token.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/admin';
+  private baseUrl = 'http://localhost:3000/auth';
 
   constructor(
     private http: HttpClient,
@@ -39,22 +39,25 @@ export class AuthService {
   getUserId(): string {
     return this.tokenService.decodeToken()?.sub || '';
   }
+
   forgotPassword(data: { email: string }): Observable<any> {
-    return this.http.post('auth/forgot-password', data);
+    return this.http.post(`${this.baseUrl}/forgot-password`, data);
   }
 
   getUserEmail(): string {
     return this.tokenService.decodeToken()?.email || '';
   }
+
   register(data: {
     name: string;
     email: string;
     password: string;
     role: string;
   }): Observable<any> {
-    return this.http.post('auth/register', data);
+    return this.http.post(`${this.baseUrl}/register`, data);
   }
+
   resetPassword(data: { token: string; newPassword: string }): Observable<any> {
-    return this.http.post('auth/reset-password', data);
+    return this.http.post(`${this.baseUrl}/reset-password`, data);
   }
 }

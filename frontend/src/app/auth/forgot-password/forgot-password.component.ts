@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { FormErrorComponent } from '../../shared/components/form-error.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -18,6 +19,7 @@ import { FormErrorComponent } from '../../shared/components/form-error.component
     FormErrorComponent,
     CommonModule,
     ReactiveFormsModule,
+    RouterModule, // Add this line to enable routerLink
   ],
 })
 export class ForgotPasswordComponent {

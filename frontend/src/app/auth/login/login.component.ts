@@ -38,30 +38,22 @@ export class LoginComponent {
 
     this.authService.login(this.form.value).subscribe({
       next: (res) => {
-        // --- FIX IS HERE ---
-        // Change res.user.role to res.admin.role
-        console.log('response', res.admin.role); // Corrected: res.admin.role
-
-        // Also ensure you use the correct variable for the switch
-        const userRole = res.admin.role; // Extract the role here
-
-        this.loading = false; // Set loading to false on success, not true again
-
-        switch (
-          userRole // Use userRole here
-        ) {
+        this.loading = false;
+        // Get user role from decoded JWT token
+        const userRole = this.authService.getUserRole();
+        switch (userRole) {
           case 'USER':
-            this.router.navigate(['/user/dashboard']);
+            this.router.navigate(['/user/profile']);
             break;
           case 'AGENT':
             this.router.navigate(['/agent/dashboard']);
             break;
           case 'ADMIN':
-          case 'MAIN_ADMIN': // MAIN_ADMIN is also an ADMIN role for dashboard
+          case 'MAIN_ADMIN':
             this.router.navigate(['/admin/dashboard']);
             break;
           default:
-            this.router.navigate(['/home']); // Or a default landing page
+            this.router.navigate(['/home']);
             break;
         }
       },
@@ -71,7 +63,7 @@ export class LoginComponent {
             (err.error?.message ||
               err.message ||
               'Đã xảy ra lỗi không xác định.')
-        ); // Improved error message
+        );
         this.loading = false;
       },
     });
@@ -81,6 +73,6 @@ export class LoginComponent {
   }
 
   goToResetPassword(): void {
-    this.router.navigate(['auth/reset-password']);
+    this.router.navigate(['auth/forgot-password']);
   }
 }

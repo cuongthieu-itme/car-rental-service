@@ -32,6 +32,21 @@ export class AgentsListComponent implements OnInit {
     });
   }
 
+  viewAgent(id: string): void {
+    // TODO: Implement view agent details logic
+    console.log('View agent', id);
+  }
+
+  editAgent(id: string): void {
+    // TODO: Implement edit agent logic
+    console.log('Edit agent', id);
+  }
+
+  deleteAgent(id: string): void {
+    // TODO: Implement delete agent logic
+    console.log('Delete agent', id);
+  }
+
   private updateStatus(id: string, status: string): void {
     this.agents = this.agents.map((a) => (a.id === id ? { ...a, status } : a));
   }

@@ -23,4 +23,14 @@ export class BookingDetailComponent implements OnInit {
       .getBookingById(id)
       .subscribe((data) => (this.booking = data));
   }
+
+  goBack(): void {
+    // TODO: Implement go back logic
+    console.log('Go back');
+  }
+
+  cancelBooking(): void {
+    // TODO: Implement cancel booking logic
+    console.log('Cancel booking');
+  }
 }

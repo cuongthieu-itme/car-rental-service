@@ -30,4 +30,29 @@ export class BookingsListComponent implements OnInit {
       });
     }
   }
+
+  viewBooking(id: string): void {
+    // TODO: Implement view booking details logic
+    console.log('View booking', id);
+  }
+
+  editBooking(id: string): void {
+    // TODO: Implement edit booking logic
+    console.log('Edit booking', id);
+  }
+
+  approveBooking(id: string): void {
+    // TODO: Implement approve booking logic
+    console.log('Approve booking', id);
+  }
+
+  rejectBooking(id: string): void {
+    // TODO: Implement reject booking logic
+    console.log('Reject booking', id);
+  }
+
+  deleteBooking(id: string): void {
+    // TODO: Implement delete booking logic
+    console.log('Delete booking', id);
+  }
 }

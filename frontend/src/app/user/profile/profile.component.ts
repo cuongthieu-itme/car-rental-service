@@ -7,16 +7,26 @@ import {
 } from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
 import { FormErrorComponent } from '../../shared/components/form-error.component';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  imports: [FormErrorComponent, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormErrorComponent,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
 })
 export class ProfileComponent implements OnInit {
   form!: FormGroup;
   loading = false;
+  saving = false;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
@@ -34,9 +44,24 @@ export class ProfileComponent implements OnInit {
 
   save() {
     if (this.form.invalid) return;
-    this.loading = true;
-    this.userService.updateProfile(this.form.value).subscribe(() => {
-      this.loading = false;
+    this.saving = true;
+    this.successMessage = null;
+    this.errorMessage = null;
+    this.userService.updateProfile(this.form.value).subscribe({
+      next: () => {
+        this.saving = false;
+        this.successMessage = 'Cập nhật hồ sơ thành công!';
+      },
+      error: (err) => {
+        this.saving = false;
+        this.errorMessage = 'Có lỗi xảy ra khi cập nhật hồ sơ.';
+      },
     });
+  }
+
+  logout() {
+    // Implement your logout logic here, e.g., call a service and redirect
+    // For now, just reload the page or navigate to login
+    window.location.href = '/login';
   }
 }

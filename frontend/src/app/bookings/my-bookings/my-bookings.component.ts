@@ -19,4 +19,14 @@ export class MyBookingsComponent implements OnInit {
       .getMyBookings()
       .subscribe((data) => (this.bookings = data));
   }
+
+  viewBookingDetails(id: string): void {
+    // TODO: Implement view booking details logic
+    console.log('View booking details', id);
+  }
+
+  cancelBooking(id: string): void {
+    // TODO: Implement cancel booking logic
+    console.log('Cancel booking', id);
+  }
 }

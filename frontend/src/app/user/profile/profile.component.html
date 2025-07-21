@@ -1,14 +1,4 @@
-<div class="profile-container">
-  <!-- User Navigation -->
-  <nav class="user-nav">
-    <a routerLink="/user/profile" routerLinkActive="active">Hồ sơ</a>
-    <a routerLink="/user/change-password" routerLinkActive="active">Đổi mật khẩu</a>
-    <a routerLink="/user/metrics" routerLinkActive="active">Thống kê</a>
-    <a routerLink="/bookings/my-bookings" routerLinkActive="active">Lịch sử thuê</a>
-    <a routerLink="/support/my-tickets" routerLinkActive="active">Hỗ trợ</a>
-    <a (click)="logout()" class="logout-btn">Đăng xuất</a>
-  </nav>
-
+<div class="auth-container">
   <h2>Hồ sơ của bạn</h2>
 
   <!-- Loading state -->
@@ -36,7 +26,7 @@
 
     <div class="form-group">
       <label>Địa chỉ Email</label>
-      <input formControlName="email" type="email" placeholder="Nhập địa chỉ email" />
+      <input formControlName="email" type="email" placeholder="Nhập địa chỉ email" [disabled]="true" />
       <app-form-error [control]="form.get('email')!" />
     </div>
 
@@ -49,4 +39,12 @@
       {{ saving ? "Đang lưu..." : "Lưu thay đổi" }}
     </button>
   </form>
+
+  <div class="form-footer">
+    <a routerLink="/user/change-password">Đổi mật khẩu</a> |
+    <a routerLink="/user/metrics">Thống kê</a> |
+    <a routerLink="/bookings/my-bookings">Lịch sử thuê</a> |
+    <a routerLink="/support/my-tickets">Hỗ trợ</a> |
+    <a (click)="logout()" class="logout-btn">Đăng xuất</a>
+  </div>
 </div>

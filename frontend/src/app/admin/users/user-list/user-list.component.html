@@ -1,4 +1,63 @@
-<div class="auth-container">
-  <h2>Quản lý người dùng</h2>
-  <p>Chức năng quản lý người dùng sẽ hiển thị tại đây.</p>
+<div class="user-list-container">
+  <h2 class="user-list-title">Quản lý người dùng</h2>
+  <div class="user-list-toolbar">
+    <input type="text" placeholder="Tìm kiếm email, tên, SĐT..." [(ngModel)]="searchTerm" class="user-list-search"/>
+    <button class="btn btn-primary" (click)="onSearch()">Tìm kiếm</button>
+    <button class="btn btn-success" (click)="openCreate()"><i class="fas fa-plus"></i> Thêm user</button>
+  </div>
+  <div class="user-list-table-wrapper">
+    <table class="user-list-table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Tên</th>
+          <th>SĐT</th>
+          <th>Role</th>
+          <th>Xác thực</th>
+          <th>Ngày tạo</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{ user.email }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.phone || '-' }}</td>
+          <td><span class="role-badge role-{{user.role | lowercase}}">{{ user.role }}</span></td>
+          <td>
+            <span [class]="user.isEmailVerified ? 'verified' : 'not-verified'">
+              <i class="fas" [ngClass]="user.isEmailVerified ? 'fa-check-circle' : 'fa-times-circle'"></i>
+            </span>
+          </td>
+          <td>{{ user.createdAt | date:'short' }}</td>
+          <td>
+            <button class="btn btn-info" (click)="openDetail(user)"><i class="fas fa-info-circle"></i> Chi tiết</button>
+            <button class="btn btn-warning" (click)="openEdit(user)"><i class="fas fa-edit"></i> Sửa</button>
+            <button class="btn btn-danger" (click)="confirmDelete(user)"><i class="fas fa-trash"></i> Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="filteredUsers.length === 0 && !isLoading" class="no-data">Không có người dùng nào.</div>
+  </div>
+  <div *ngIf="isLoading" class="loading"><i class="fas fa-spinner fa-spin"></i> Đang tải...</div>
+  <div *ngIf="errorMessage" class="error"><i class="fas fa-exclamation-circle"></i> {{ errorMessage }}</div>
+  <div *ngIf="showEdit && selectedUser" class="user-edit-modal-overlay">
+    <app-user-edit
+      [user]="selectedUser"
+      (updated)="closeEdit(true)"
+      (cancel)="closeEdit()"
+    ></app-user-edit>
+  </div>
+  <div *ngIf="showCreate" class="user-create-modal-overlay">
+    <app-user-create
+      (created)="closeCreate(true)"
+      (cancel)="closeCreate()"
+    ></app-user-create>
+  </div>
+  <app-user-detail
+    *ngIf="showDetail && selectedUser"
+    [user]="selectedUser"
+    (close)="closeDetail()"
+  ></app-user-detail>
 </div>

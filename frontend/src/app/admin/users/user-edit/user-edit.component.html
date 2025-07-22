@@ -1,0 +1,11 @@
+<div class="user-edit-modal">
+  <h3>Cập nhật người dùng</h3>
+  <app-user-form
+    [editMode]="true"
+    [initialData]="user"
+    [loading]="loading"
+    [errorMessage]="errorMessage"
+    (submitForm)="onSubmit($event)"
+    (cancel)="cancel.emit()"
+  ></app-user-form>
+</div>

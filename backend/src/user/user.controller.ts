@@ -9,6 +9,8 @@ import {
   Post,
   Req,
   UseGuards,
+  Delete,
+  Param,
 } from '@nestjs/common';
 import { BookingsService } from 'src/booking/booking.service';
 import { CreateBookingDto } from '../booking/dto/create-booking.dto';
@@ -19,9 +21,9 @@ import { ChangePasswordDto } from './dto/change-password.dto';
 import { ReviewDto } from './dto/review.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('USER')
 @Controller('users')
 export class UserController {
   constructor(
@@ -66,5 +68,40 @@ export class UserController {
   @Get('reviews')
   getReviews(@Req() req) {
     return this.userService.getMyReviews(req.user.id);
+  }
+
+  // ADMIN: Lấy danh sách user
+  @Get('admin')
+  @Roles('ADMIN', 'MAIN_ADMIN')
+  getAllUsers() {
+    return this.userService.getAllUsers();
+  }
+
+  // ADMIN: Lấy chi tiết user
+  @Get('admin/:id')
+  @Roles('ADMIN', 'MAIN_ADMIN')
+  getUserById(@Param('id') id: string) {
+    return this.userService.getUserById(id);
+  }
+
+  // ADMIN: Tạo user mới
+  @Post('admin')
+  @Roles('ADMIN', 'MAIN_ADMIN')
+  createUser(@Body() dto: CreateUserDto) {
+    return this.userService.createUser(dto);
+  }
+
+  // ADMIN: Sửa user
+  @Patch('admin/:id')
+  @Roles('ADMIN', 'MAIN_ADMIN')
+  updateUser(@Param('id') id: string, @Body() dto: UpdateUserDto) {
+    return this.userService.updateUser(id, dto);
+  }
+
+  // ADMIN: Xóa user
+  @Delete('admin/:id')
+  @Roles('ADMIN', 'MAIN_ADMIN')
+  deleteUser(@Param('id') id: string) {
+    return this.userService.deleteUser(id);
   }
 }

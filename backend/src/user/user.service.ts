@@ -108,6 +108,7 @@ export class UserService {
         role: dto.role,
         isEmailVerified: dto.isEmailVerified || true,
         profilePhoto: dto.profilePhoto,
+        name: dto.name || '',
       },
     });
   }
@@ -136,5 +137,47 @@ export class UserService {
       where: { id: userId },
       data: dto,
     });
+  }
+
+  async getAllUsers(): Promise<Partial<User>[]> {
+    return this.prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        phone: true,
+        role: true,
+        isEmailVerified: true,
+        createdAt: true,
+        profilePhoto: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async getUserById(id: string): Promise<Partial<User>> {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        phone: true,
+        role: true,
+        isEmailVerified: true,
+        createdAt: true,
+        profilePhoto: true,
+      },
+    });
+    if (!user) throw new NotFoundException('User not found');
+    return user;
+  }
+
+  async deleteUser(id: string): Promise<{ message: string }> {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    if (!user) throw new NotFoundException('User not found');
+    await this.prisma.user.delete({ where: { id } });
+    // TODO: Audit log nếu cần
+    return { message: 'User deleted successfully' };
   }
 }

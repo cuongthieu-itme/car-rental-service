@@ -43,7 +43,7 @@ model User {
   email           String   @unique
   phone           String?
   password        String
-  name            String   @default("Default Name")
+  name            String
   role            Role     @default(USER)
   isEmailVerified Boolean  @default(true)
   createdAt       DateTime @default(now())

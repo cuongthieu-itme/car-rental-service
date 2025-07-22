@@ -1,0 +1,10 @@
+<div class="user-create-modal">
+  <h3>Thêm người dùng mới</h3>
+  <app-user-form
+    [editMode]="false"
+    [loading]="loading"
+    [errorMessage]="errorMessage"
+    (submitForm)="onSubmit($event)"
+    (cancel)="cancel.emit()"
+  ></app-user-form>
+</div>

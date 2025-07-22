@@ -1,0 +1,12 @@
+<div class="user-detail-modal">
+  <div class="user-detail-card">
+    <h3>Chi tiết người dùng</h3>
+    <div><b>Email:</b> {{ user.email }}</div>
+    <div><b>Tên:</b> {{ user.name }}</div>
+    <div><b>SĐT:</b> {{ user.phone || '-' }}</div>
+    <div><b>Role:</b> {{ user.role }}</div>
+    <div><b>Xác thực:</b> {{ user.isEmailVerified ? '✔️' : '❌' }}</div>
+    <div><b>Ngày tạo:</b> {{ user.createdAt | date:'short' }}</div>
+    <button class="btn btn-secondary" (click)="close.emit()">Đóng</button>
+  </div>
+</div>

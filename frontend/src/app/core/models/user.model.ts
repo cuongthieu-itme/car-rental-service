@@ -4,6 +4,7 @@ import { Notification } from './notification.model';
 export interface User {
   id: string;
   email: string;
+  name?: string;
   phone?: string;
   password?: string;
   role: Role;

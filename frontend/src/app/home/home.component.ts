@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'; // Required for ngFor, ngIf
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,31 +15,37 @@ export class HomeComponent {
   // Mock data for "Our Best Offers" section
   cars = [
     {
+      id: 'car1',
       name: 'XE TOYOTA CAMRY',
       price: 45.9,
       imageUrl: 'https://placehold.co/300x200/cccccc/000000?text=Car+1',
     },
     {
+      id: 'car2',
       name: 'XE HONDA CIVIC',
       price: 38.0,
       imageUrl: 'https://placehold.co/300x200/cccccc/000000?text=Car+2',
     },
     {
+      id: 'car3',
       name: 'XE MAZDA CX-5',
       price: 38.5,
       imageUrl: 'https://placehold.co/300x200/cccccc/000000?text=Car+3',
     },
     {
+      id: 'car4',
       name: 'XE FORD EVEREST',
       price: 45.9,
       imageUrl: 'https://placehold.co/300x200/cccccc/000000?text=Car+4',
     },
     {
+      id: 'car5',
       name: 'XE NISSAN X-TRAIL',
       price: 38.0,
       imageUrl: 'https://placehold.co/300x200/cccccc/000000?text=Car+5',
     },
     {
+      id: 'car6',
       name: 'XE HYUNDAI TUCSON',
       price: 38.5,
       imageUrl: 'https://placehold.co/300x200/cccccc/000000?text=Car+6',
@@ -68,7 +75,7 @@ export class HomeComponent {
     phone: '',
     message: '',
   };
-  constructor(private router: Router) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   // Placeholder for form submission logic
   onSubmitContactForm(): void {
@@ -79,8 +86,16 @@ export class HomeComponent {
     this.contactForm = { name: '', email: '', phone: '', message: '' };
   }
 
-  onBookNowClick() {
-    this.router.navigate(['/auth/login']);
+  onBookNowClick(car: any) {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/bookings/create', car.id]);
+    } else {
+      this.router.navigate(['/auth/login']);
+    }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   // Placeholder for navigation (e.g., for testimonial carousel)

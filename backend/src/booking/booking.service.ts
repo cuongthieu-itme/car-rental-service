@@ -8,13 +8,27 @@ export class BookingsService {
   constructor(private prisma: PrismaService) {}
 
   async create(userId: string, dto: CreateBookingDto) {
-    // Line 11: The error occurs here
+    // Validate required fields
+    if (
+      !dto.pickupDate ||
+      !dto.dropoffDate ||
+      !dto.totalAmount ||
+      !dto.vehicleId
+    ) {
+      throw new Error('Missing required booking fields');
+    }
+    // Validate date format
+    const pickupDate = new Date(dto.pickupDate);
+    const dropoffDate = new Date(dto.dropoffDate);
+    if (isNaN(pickupDate.getTime()) || isNaN(dropoffDate.getTime())) {
+      throw new Error('Invalid date format for pickupDate or dropoffDate');
+    }
     return this.prisma.booking.create({
       data: {
-        userId: userId, // Assuming userId is correctly passed from req.user.id
-        vehicleId: dto.vehicleId, // This is the ID that's causing the foreign key violation
-        pickupDate: dto.pickupDate,
-        dropoffDate: dto.dropoffDate,
+        userId: userId,
+        vehicleId: dto.vehicleId,
+        pickupDate: pickupDate,
+        dropoffDate: dropoffDate,
         totalAmount: dto.totalAmount,
       },
     });

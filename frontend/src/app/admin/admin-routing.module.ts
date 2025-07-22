@@ -9,37 +9,56 @@ const routes: Routes = [
     path: 'admin',
     component: DashboardComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['ADMIN'] },
+    data: { roles: ['ADMIN', 'MAIN_ADMIN'] },
   },
   {
     path: 'vehicles',
     loadChildren: () =>
       import('./vehicles/vehicles.module').then((m) => m.VehiclesModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'MAIN_ADMIN'] },
   },
   {
     path: 'agents',
     loadChildren: () =>
       import('./agents/agent.module').then((m) => m.AgentsModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'MAIN_ADMIN'] },
   },
   {
     path: 'bookings',
     loadChildren: () =>
       import('./bookings/bookings.module').then((m) => m.BookingsModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'MAIN_ADMIN'] },
   },
   {
     path: 'audit',
     loadChildren: () =>
       import('../audit/audit.module').then((m) => m.AuditModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['MAIN_ADMIN'] },
   },
   {
     path: 'metrics',
     loadChildren: () =>
       import('../metrics/metrics.module').then((m) => m.MetricsModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'MAIN_ADMIN'] },
   },
   {
     path: 'support',
     loadChildren: () =>
       import('../support/support.module').then((m) => m.SupportModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'MAIN_ADMIN', 'AGENT'] },
+  },
+  {
+    path: 'users',
+    loadChildren: () =>
+      import('./users/users.module').then((m) => m.UsersModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN', 'MAIN_ADMIN'] },
   },
 ];
 

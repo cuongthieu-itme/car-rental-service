@@ -60,4 +60,9 @@ export class AuthService {
   resetPassword(data: { token: string; newPassword: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/reset-password`, data);
   }
+
+  isMainAdmin(): boolean {
+    const user = this.tokenService.decodeToken();
+    return !!user?.isMainAdmin || user?.role === 'MAIN_ADMIN';
+  }
 }

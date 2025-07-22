@@ -15,6 +15,7 @@
     <div class="top-bar">
       <div class="logo">AutoRent</div>
       <div class="location"><i class="fas fa-map-marker-alt"></i> Vị trí</div>
+      <button *ngIf="authService.isLoggedIn()" class="btn btn-secondary" (click)="logout()" style="margin-left: 16px;">Đăng xuất</button>
     </div>
     <nav class="navbar">
       <ul>
@@ -94,7 +95,7 @@
         <img [src]="car.imageUrl" alt="Hình ảnh xe" />
         <h3>{{ car.name }}</h3>
         <p>Từ ${{ car.price | number : "1.2-2" }} / ngày</p>
-        <button class="btn btn-offer" (click)="onBookNowClick()">ĐẶT NGAY</button>
+        <button class="btn btn-offer" (click)="onBookNowClick(car)">ĐẶT NGAY</button>
       </div>
     </div>
   </section>

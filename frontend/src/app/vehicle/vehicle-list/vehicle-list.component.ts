@@ -2,8 +2,10 @@
 
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Vehicle } from '../vehicle.model';
 import { VehicleService } from './vehicle.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -17,7 +19,11 @@ export class VehicleListComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
 
-  constructor(private vehicleService: VehicleService) {}
+  constructor(
+    private vehicleService: VehicleService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loadVehicles();
@@ -59,9 +65,11 @@ export class VehicleListComponent implements OnInit {
    * @param vehicle The vehicle object to book.
    */
   bookVehicle(vehicle: Vehicle): void {
-    alert(`Initiating booking for: ${vehicle.name}`);
-    // Implement Angular Router navigation to a booking form:
-    // this.router.navigate(['/book-vehicle', vehicle.id]);
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/bookings/create', vehicle.id]);
+    } else {
+      this.router.navigate(['/auth/login']);
+    }
   }
 
   // Removed editVehicle and deleteVehicle methods as they are not for user view

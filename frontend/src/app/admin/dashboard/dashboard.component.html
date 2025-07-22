@@ -23,28 +23,28 @@
     <section class="stats-cards-section">
       <h3>Thống kê tổng quan</h3>
       <div class="stats-cards-grid">
-        <div class="stat-card">
+        <div class="stat-card" (click)="onStatCardClick('users')" style="cursor:pointer">
           <div class="icon-wrapper"><i class="fas fa-users"></i></div>
           <div class="card-info">
             <span class="card-value">{{ stats.totalUsers || 0 }}</span>
             <span class="card-label">Tổng người dùng</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card" (click)="onStatCardClick('vehicles')" style="cursor:pointer">
           <div class="icon-wrapper"><i class="fas fa-car-side"></i></div>
           <div class="card-info">
             <span class="card-value">{{ stats.totalVehicles || 0 }}</span>
             <span class="card-label">Tổng số xe</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card" (click)="onStatCardClick('bookings')" style="cursor:pointer">
           <div class="icon-wrapper"><i class="fas fa-book"></i></div>
           <div class="card-info">
             <span class="card-value">{{ stats.totalBookings || 0 }}</span>
             <span class="card-label">Tổng đặt xe</span>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card" (click)="onStatCardClick('revenue')" style="cursor:pointer">
           <div class="icon-wrapper"><i class="fas fa-dollar-sign"></i></div>
           <div class="card-info">
             <span class="card-value">

@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: AgentsListComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['ADMIN'] },
+    data: { roles: ['ADMIN', 'MAIN_ADMIN'] },
   },
 ];
 

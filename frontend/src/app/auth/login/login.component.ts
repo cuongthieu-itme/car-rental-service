@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { FormErrorComponent } from '../../shared/components/form-error.component';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router
   ) {
     this.form = this.fb.group({
@@ -43,7 +45,17 @@ export class LoginComponent {
         const userRole = this.authService.getUserRole();
         switch (userRole) {
           case 'USER':
-            this.router.navigate(['/user/profile']);
+            // Fetch profile to check if name is updated
+            this.userService.getProfile().subscribe({
+              next: (profile) => {
+                if (profile.name && profile.name !== 'Default Name') {
+                  this.router.navigate(['/']);
+                } else {
+                  this.router.navigate(['/user/profile']);
+                }
+              },
+              error: () => this.router.navigate(['/user/profile']),
+            });
             break;
           case 'AGENT':
             this.router.navigate(['/agent/dashboard']);

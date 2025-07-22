@@ -20,7 +20,7 @@ export const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['USER'] },
+    data: { roles: ['USER', 'ADMIN', 'MAIN_ADMIN'] },
   },
 
   // Agent
@@ -112,6 +112,15 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     // You might add data for a more specific role guard if needed:
     // data: { roles: ['MAIN_ADMIN'] }
+  },
+
+  // Unauthorized route
+  {
+    path: 'unauthorized',
+    loadComponent: () =>
+      import('./core/components/unauthorized.component').then(
+        (m) => m.UnauthorizedComponent
+      ),
   },
 ];
 

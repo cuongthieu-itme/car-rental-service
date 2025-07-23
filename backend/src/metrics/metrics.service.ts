@@ -18,18 +18,21 @@ export class MetricsService {
   }
 
   async getAdminDashboard() {
-    const [totalUsers, totalBookings, totalRevenue, vehicles] =
+    const [totalUsers, totalBookings, confirmedRevenue, vehicles] =
       await Promise.all([
         this.prisma.user.count(),
         this.prisma.booking.count(),
-        this.prisma.payment.aggregate({ _sum: { amount: true } }),
+        this.prisma.booking.aggregate({
+          _sum: { totalAmount: true },
+          where: { status: { in: ['CONFIRMED', 'COMPLETED'] } },
+        }),
         this.prisma.vehicle.findMany(),
       ]);
 
     return {
       totalUsers,
       totalBookings,
-      totalRevenue: totalRevenue._sum.amount || 0,
+      totalRevenue: confirmedRevenue._sum.totalAmount || 0,
       fleet: {
         total: vehicles.length,
         byCategory: vehicles.reduce(

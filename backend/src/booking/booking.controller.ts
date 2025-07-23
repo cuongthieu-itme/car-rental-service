@@ -27,6 +27,12 @@ export class BookingsController {
     return this.bookingsService.create(req.user.id, dto);
   }
 
+  @Post('admin')
+  @Roles('ADMIN', 'MAIN_ADMIN')
+  createByAdmin(@Body() dto: CreateBookingDto) {
+    return this.bookingsService.create(dto.userId, dto);
+  }
+
   @Get('mine')
   @Roles('USER')
   findMine(@Req() req) {

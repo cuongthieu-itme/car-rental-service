@@ -1,39 +1,77 @@
-h2 {
-  text-align: center;
-  margin-bottom: 1rem;
+.booking-list-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 32px 24px 24px 24px;
+  font-family: 'Inter', sans-serif;
 }
-
-table {
+.booking-list-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: #1976d2;
+  font-weight: 700;
+}
+.loading, .error {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 18px 0;
+}
+.error { color: #e74c3c; }
+.booking-list-table {
   width: 100%;
-  max-width: 1000px;
-  margin: auto;
   border-collapse: collapse;
-
-  th,
-  td {
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    text-align: left;
-  }
-
-  thead {
-    background-color: #eee;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  button {
-    padding: 0.5rem 1rem;
-    border: none;
-    background-color: #e74c3c;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-
-  button:hover {
-    background-color: #c0392b;
-  }
+  margin-top: 1rem;
+  background: #fff;
+}
+.booking-list-table th, .booking-list-table td {
+  padding: 0.75rem;
+  border: 1px solid #eee;
+  text-align: left;
+}
+.booking-list-table thead {
+  background: #f0f0f0;
+}
+.booking-list-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.status-badge {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 8px;
+  font-size: 0.98em;
+  font-weight: 600;
+  background: #e3f2fd;
+  color: #1976d2;
+  text-transform: capitalize;
+}
+.status-confirmed { background: #e8f5e9; color: #388e3c; }
+.status-pending { background: #fffde7; color: #ffa000; }
+.status-cancelled { background: #ffebee; color: #e74c3c; }
+.status-rejected { background: #ffebee; color: #e74c3c; }
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 4px;
+  transition: background 0.2s;
+  background: #f4f6f8;
+  color: #1976d2;
+}
+.btn-view { background: #e3f2fd; color: #1976d2; }
+.btn-edit { background: #fff3e0; color: #ff9800; }
+.btn-approve { background: #e8f5e9; color: #388e3c; }
+.btn-reject { background: #ffebee; color: #e74c3c; }
+.btn-delete { background: #ffebee; color: #e74c3c; }
+.btn:hover { opacity: 0.9; }
+.no-data {
+  text-align: center;
+  color: #888;
+  font-size: 1.1rem;
+  margin: 18px 0;
 }

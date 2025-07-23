@@ -1,19 +1,1 @@
-<div class="vehicle-edit">
-    <h2>Chỉnh sửa xe</h2>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <label>Hãng xe</label>
-      <input formControlName="make" type="text" required placeholder="Nhập hãng xe" />
 
-      <label>Mẫu xe</label>
-      <input formControlName="model" type="text" required placeholder="Nhập mẫu xe" />
-
-      <label>Trạng thái</label>
-      <select formControlName="status">
-        <option value="AVAILABLE">Có sẵn</option>
-        <option value="RENTED">Đã thuê</option>
-        <option value="MAINTENANCE">Bảo trì</option>
-      </select>
-
-      <button type="submit">Cập nhật xe</button>
-    </form>
-  </div>

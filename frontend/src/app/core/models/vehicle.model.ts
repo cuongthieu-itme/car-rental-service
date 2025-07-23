@@ -8,7 +8,6 @@ export interface Vehicle {
   category: VehicleCategory;
   pricePerDay: number;
   pricePerHour: number;
-  availability: boolean;
   location: string;
   transmission: string;
   fuelType: FuelType;

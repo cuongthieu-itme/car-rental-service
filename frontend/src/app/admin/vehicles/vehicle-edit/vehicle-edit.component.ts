@@ -1,47 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { VehicleService } from '../../../core/services/vehicle.service';
+import { Vehicle } from '../../../core/models/vehicle.model';
+import { VehicleFormComponent } from '../vehicle-list/vehicle-form.component';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-vehicle-edit',
-  templateUrl: './vehicle-edit.component.html',
+  standalone: true,
+  imports: [CommonModule, VehicleFormComponent],
+  template: `
+    <div class="vehicle-edit-modal-overlay" *ngIf="vehicle">
+      <app-vehicle-form
+        [initialData]="vehicle"
+        [submitLabel]="'Cập nhật'"
+        (submitForm)="onSubmit($event)"
+        [loading]="loading"
+        [errorMessage]="errorMessage"
+        (cancel)="onCancel()"
+      ></app-vehicle-form>
+    </div>
+  `,
   styleUrls: ['./vehicle-edit.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule]
 })
 export class VehicleEditComponent implements OnInit {
- 
-
-  vehicleId!: string;
-  form: FormGroup<any>;
+  vehicle: Vehicle | null = null;
+  loading = false;
+  errorMessage = '';
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
-    private vehicleService: VehicleService,
-    private router: Router
-  ) {
-    this.form = this.fb.group({
-      make: ['', Validators.required],
-      model: ['', Validators.required],
-      status: ['', Validators.required],
-    });
-  }
+    private vehicleService: VehicleService
+  ) {}
 
   ngOnInit(): void {
-    this.vehicleId = this.route.snapshot.paramMap.get('id') || '';
-    this.vehicleService.getVehicleById(this.vehicleId).subscribe((vehicle) => {
-      this.form.patchValue(vehicle);
+    const id = this.route.snapshot.paramMap.get('id') || '';
+    this.vehicleService.getVehicleById(id).subscribe({
+      next: (v) => (this.vehicle = v),
+      error: (err) =>
+        (this.errorMessage = err?.error?.message || 'Không tìm thấy xe'),
     });
   }
 
-  onSubmit(): void {
-    if (this.form.valid) {
-      this.vehicleService
-        .updateVehicle(this.vehicleId, this.form.value)
-        .subscribe(() => {
-          this.router.navigate(['/admin/vehicles']);
-        });
-    }
+  onSubmit(data: any) {
+    if (!this.vehicle) return;
+    this.loading = true;
+    this.errorMessage = '';
+    this.vehicleService.updateVehicle(this.vehicle.id, data).subscribe({
+      next: () => window.location.reload(),
+      error: (err) => {
+        this.errorMessage = err?.error?.message || 'Lỗi cập nhật xe';
+        this.loading = false;
+      },
+    });
+  }
+  onCancel() {
+    window.history.back();
   }
 }

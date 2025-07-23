@@ -1,32 +1,63 @@
-<h1>Quản lý xe</h1>
-<button routerLink="/admin/vehicles/create" class="create-btn">Thêm xe</button>
-
-<div *ngIf="loading">Đang tải...</div>
-
-<table *ngIf="!loading">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Hãng</th>
-      <th>Mẫu</th>
-      <th>Trạng thái</th>
-      <th>Thao tác</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let vehicle of vehicles">
-      <td>{{ vehicle.id }}</td>
-      <td>{{ vehicle.make }}</td>
-      <td>{{ vehicle.model }}</td>
-      <td>{{ vehicle.status }}</td>
-      <td>
-        <button (click)="editVehicle(vehicle.id)">Sửa</button>
-        <button (click)="deleteVehicle(vehicle.id)" class="delete">Xóa</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<div *ngIf="!loading && vehicles.length === 0">
-  Không tìm thấy xe nào.
+<div class="vehicle-list-container">
+  <h2 class="vehicle-list-title">Quản lý xe</h2>
+  <div class="vehicle-list-toolbar">
+    <input type="text" placeholder="Tìm kiếm tên, mô tả, vị trí..." [(ngModel)]="searchTerm" class="vehicle-list-search"/>
+    <button class="btn btn-primary" (click)="onSearch()">Tìm kiếm</button>
+    <button class="btn btn-success" (click)="openCreate()"><i class="fas fa-plus"></i> Thêm xe</button>
+  </div>
+  <div class="vehicle-list-table-wrapper">
+    <table class="vehicle-list-table" *ngIf="!isLoading">
+      <thead>
+        <tr>
+          <th>Tên xe</th>
+          <th>Loại</th>
+          <th>Giá/ngày</th>
+          <th>Vị trí</th>
+          <th>Nhiên liệu</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of filteredVehicles">
+          <td>{{ vehicle.name }}</td>
+          <td><span class="category-badge category-{{vehicle.category | lowercase}}">{{ vehicle.category }}</span></td>
+          <td>{{ vehicle.pricePerDay | number:'1.0-0' }} đ</td>
+          <td>{{ vehicle.location }}</td>
+          <td>{{ vehicle.fuelType }}</td>
+          <td>
+            <button class="btn btn-info" (click)="openDetail(vehicle)"><i class="fas fa-info-circle"></i> Chi tiết</button>
+            <button class="btn btn-warning" (click)="openEdit(vehicle)"><i class="fas fa-edit"></i> Sửa</button>
+            <button class="btn btn-danger" (click)="confirmDelete(vehicle)"><i class="fas fa-trash"></i> Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="filteredVehicles.length === 0 && !isLoading" class="no-data">Không có xe nào.</div>
+  </div>
+  <div *ngIf="isLoading" class="loading"><i class="fas fa-spinner fa-spin"></i> Đang tải...</div>
+  <div *ngIf="errorMessage" class="error"><i class="fas fa-exclamation-circle"></i> {{ errorMessage }}</div>
+  <div *ngIf="showEdit && selectedVehicle" class="vehicle-edit-modal-overlay">
+    <app-vehicle-form
+      [initialData]="selectedVehicle"
+      [submitLabel]="'Cập nhật'"
+      (submitForm)="handleUpdateVehicle($event)"
+      (cancel)="closeEdit()"
+      [loading]="isLoading"
+      [errorMessage]="errorMessage"
+    ></app-vehicle-form>
+  </div>
+  <div *ngIf="showCreate" class="vehicle-create-modal-overlay">
+    <app-vehicle-form
+      [submitLabel]="'Tạo xe'"
+      (submitForm)="handleCreateVehicle($event)"
+      (cancel)="closeCreate()"
+      [loading]="isLoading"
+      [errorMessage]="errorMessage"
+    ></app-vehicle-form>
+  </div>
+  <app-vehicle-detail
+    *ngIf="showDetail && selectedVehicle"
+    [vehicle]="selectedVehicle"
+    (close)="closeDetail()"
+  ></app-vehicle-detail>
 </div>

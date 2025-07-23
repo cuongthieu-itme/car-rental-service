@@ -1,37 +1,43 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { VehicleService } from '../../../core/services/vehicle.service';
+import { VehicleFormComponent } from '../vehicle-list/vehicle-form.component';
 import { CommonModule } from '@angular/common';
-
-
 
 @Component({
   selector: 'app-vehicle-create',
-  templateUrl: './vehicle-create.component.html',
+  standalone: true,
+  imports: [CommonModule, VehicleFormComponent],
+  template: `
+    <div class="vehicle-create-modal-overlay">
+      <app-vehicle-form
+        [submitLabel]="'Tạo xe'"
+        (submitForm)="onSubmit($event)"
+        [loading]="loading"
+        [errorMessage]="errorMessage"
+        (cancel)="onCancel()"
+      ></app-vehicle-form>
+    </div>
+  `,
   styleUrls: ['./vehicle-create.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule],
 })
 export class VehicleCreateComponent {
-  form;
+  loading = false;
+  errorMessage = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private vehicleService: VehicleService,
-    private router: Router
-  ) {
-    this.form = this.fb.group({
-      make: ['', Validators.required],
-      model: ['', Validators.required],
-      status: ['AVAILABLE', Validators.required],
+  constructor(private vehicleService: VehicleService) {}
+
+  onSubmit(data: any) {
+    this.loading = true;
+    this.errorMessage = '';
+    this.vehicleService.createVehicle(data).subscribe({
+      next: () => window.location.reload(),
+      error: (err) => {
+        this.errorMessage = err?.error?.message || 'Lỗi tạo xe';
+        this.loading = false;
+      },
     });
   }
-
-  onSubmit(): void {
-    if (this.form.valid) {
-      this.vehicleService.createVehicle(this.form.value).subscribe(() => {
-        this.router.navigate(['/admin/vehicles']);
-      });
-    }
+  onCancel() {
+    window.history.back();
   }
 }

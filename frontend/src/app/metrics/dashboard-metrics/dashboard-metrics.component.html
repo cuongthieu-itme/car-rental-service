@@ -1,12 +1,72 @@
-<h2>Dashboard Metrics</h2>
+<div class="metrics-dashboard-container">
+  <h2 class="metrics-title"><i class="fas fa-chart-bar"></i> Thống kê tổng quan</h2>
 
-<div *ngIf="loading">Loading...</div>
+  <div *ngIf="loading" class="metrics-loading"><i class="fas fa-spinner fa-spin"></i> Đang tải metrics...</div>
+  <div *ngIf="error && !loading" class="metrics-error"><i class="fas fa-exclamation-circle"></i> {{ error }}</div>
 
-<div *ngIf="!loading && metrics">
-  <div class="grid">
-    <div class="card" *ngFor="let stat of metrics | keyvalue">
-      <h3>{{ stat.key?.toString() | titlecase }}</h3>
-      <p>{{ stat.value }}</p>
+  <div *ngIf="!loading && metrics && (role === 'ADMIN' || role === 'MAIN_ADMIN') && isAdminMetrics(metrics)">
+    <div class="metrics-cards-grid">
+      <div class="metrics-card metrics-users">
+        <div class="icon"><i class="fas fa-users"></i></div>
+        <div class="info">
+          <div class="value">{{ metrics.totalUsers }}</div>
+          <div class="label">Tổng người dùng</div>
+        </div>
+      </div>
+      <div class="metrics-card metrics-vehicles">
+        <div class="icon"><i class="fas fa-car-side"></i></div>
+        <div class="info">
+          <div class="value">{{ metrics.fleet.total }}</div>
+          <div class="label">Tổng số xe</div>
+        </div>
+      </div>
+      <div class="metrics-card metrics-bookings">
+        <div class="icon"><i class="fas fa-book"></i></div>
+        <div class="info">
+          <div class="value">{{ metrics.totalBookings }}</div>
+          <div class="label">Tổng đặt xe</div>
+        </div>
+      </div>
+      <div class="metrics-card metrics-revenue">
+        <div class="icon"><i class="fas fa-dollar-sign"></i></div>
+        <div class="info">
+          <div class="value">{{ metrics.totalRevenue | number:'1.2-2' }} đ</div>
+          <div class="label">Tổng doanh thu</div>
+        </div>
+      </div>
+      <div class="metrics-card metrics-category" *ngFor="let cat of (metrics.fleet?.byCategory | keyvalue)">
+        <div class="icon"><i class="fas fa-car"></i></div>
+        <div class="info">
+          <div class="value">{{ cat.value }}</div>
+          <div class="label">{{ cat.key }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && metrics && role === 'AGENT' && bookingsHandled !== undefined">
+    <div class="metrics-cards-grid">
+      <div class="metrics-card metrics-bookings">
+        <div class="icon"><i class="fas fa-book"></i></div>
+        <div class="info">
+          <div class="value">{{ bookingsHandled }}</div>
+          <div class="label">Booking đã xử lý</div>
+        </div>
+      </div>
+      <div class="metrics-card metrics-vehicles">
+        <div class="icon"><i class="fas fa-car"></i></div>
+        <div class="info">
+          <div class="value">{{ vehiclesReturned }}</div>
+          <div class="label">Xe đã trả</div>
+        </div>
+      </div>
+      <div class="metrics-card metrics-issues">
+        <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="info">
+          <div class="value">{{ issuesReported }}</div>
+          <div class="label">Vấn đề đã báo cáo</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

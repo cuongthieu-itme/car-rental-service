@@ -33,7 +33,7 @@
         <div class="stat-card" (click)="onStatCardClick('vehicles')" style="cursor:pointer">
           <div class="icon-wrapper"><i class="fas fa-car-side"></i></div>
           <div class="card-info">
-            <span class="card-value">{{ stats.totalVehicles || 0 }}</span>
+            <span class="card-value">{{ stats.fleet?.total || 0 }}</span>
             <span class="card-label">Tổng số xe</span>
           </div>
         </div>

@@ -1,26 +1,80 @@
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .card {
-    background-color: #f4f6f8;
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  
-    h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-  
-    p {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-  }
-  
+.metrics-dashboard-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 32px 24px 24px 24px;
+  font-family: 'Inter', sans-serif;
+}
+.metrics-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: #ff5722;
+  font-weight: 700;
+}
+.metrics-loading, .metrics-error {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 18px 0;
+}
+.metrics-error { color: #e74c3c; }
+.metrics-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+  margin-top: 18px;
+}
+.metrics-card {
+  background: #f4f6f8;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  padding: 28px 18px 18px 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 110px;
+  transition: box-shadow 0.2s;
+}
+.metrics-card:hover {
+  box-shadow: 0 4px 18px rgba(25, 118, 210, 0.16);
+}
+.metrics-card .icon {
+  font-size: 2.2rem;
+  color: #ff5722;
+  background: #e3f2fd;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.metrics-card.metrics-users .icon { color: #ff9800; background: #fff3e0; }
+.metrics-card.metrics-vehicles .icon { color: #388e3c; background: #e8f5e9; }
+.metrics-card.metrics-bookings .icon { color: #1976d2; background: #e3f2fd; }
+.metrics-card.metrics-revenue .icon { color: #e64a19; background: #ffebee; }
+.metrics-card.metrics-issues .icon { color: #e74c3c; background: #ffebee; }
+.metrics-card.metrics-category .icon { color: #7b1fa2; background: #f3e5f5; }
+.metrics-card .info {
+  flex: 1;
+}
+.metrics-card .value {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #222;
+}
+.metrics-card .label {
+  font-size: 1.1rem;
+  color: #888;
+  margin-top: 2px;
+}
+@media (max-width: 700px) {
+  .metrics-dashboard-container { padding: 12px 2px 12px 2px; }
+  .metrics-cards-grid { gap: 10px; }
+  .metrics-card { padding: 16px 8px 12px 8px; min-height: 80px; }
+  .metrics-card .icon { font-size: 1.3rem; width: 36px; height: 36px; }
+  .metrics-card .value { font-size: 1.2rem; }
+  .metrics-card .label { font-size: 0.95rem; }
+}
